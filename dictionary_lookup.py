@@ -21,18 +21,17 @@ while blocks is not None and j < 3:
 
     word = blocks.find("span", {"class": "text"})
     if word is not None:
-        f.write(word.text.strip(" \n\t") + "\n")
+        print(word.text.strip(" \n\t") + "\n")
     pos = blocks.find("div", {"class": "meaning-tags"})
 
     if pos is not None:
-        f.write(f"{pos.text}\n")
+        print(f"{pos.text}\n")
     # gets the 3 best meanings of the word, or less if there are not 3
     meanings = blocks.find_all("span", {"class": "meaning-meaning"}, limit=3)
 
     for i, meaning in enumerate(meanings):
-        f.write(f"{i+1}. {meaning.text}\n")
+        print(f"{i+1}. {meaning.text}\n")
 
     blocks = blocks.find_next("div", {"class": "concept_light clearfix"})
     j += 1
 
-sys.stdout.flush()
